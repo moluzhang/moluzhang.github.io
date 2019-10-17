@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.3" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>moluzhang的博客 | </title>
+    <meta property="og:title" content="moluzhang的博客 | ">
+    <meta property="og:type" content="website">
+    <meta name="Keywords" content="">
+    <meta name="description" content="">
+    <meta property="og:url" content="andyylzhang.com/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/andyylzhang.com/css/normalize.css">
+    
+    <link rel="stylesheet" href="/andyylzhang.com/css/style.css">
+    <link rel="alternate" type="application/rss+xml+xml" href="andyylzhang.com/index.xml" title="moluzhang的博客" />
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <h1>
+                        <a id="logo" href="andyylzhang.com/andyylzhang.com/">
+                            moluzhang的博客
+                        </a>
+                    </h1>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="andyylzhang.com/andyylzhang.com/">首页</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    
+		    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="andyylzhang.com/post/python-problems/" title="python问题解决方案" >python问题解决方案</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月17日
+                            </date>
+                            
+                            <div class="post-content">
+                                1. libpython2.7.so.1.0 cannot open的解决方法 一台服务器上安装了多个python，配置不当会导致python运行时找不到某些系统库，比如今天遇到的在执行python命令时报:
+python error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory  找不到libpython2.7.so.1这个库，我们可以使用ldd命令来查看一个可执行文件执行时需要哪些系统库:
+ldd /usr/local/bin/python linux-vdso.so.1 =&gt; (0x00007fff149a2000) /$LIB/libonion.so =&gt; /lib64/libonion.so (0x00007fb6ec18d000) libpython2.7.so.1.0 =&gt; not found libpthread.so.0 =&gt; /lib64/libpthread.so.0 (0x00007fb6ebf62000) libdl.so.2 =&gt; /lib64/libdl.so.2 (0x00007fb6ebd5e000) libutil.so.1 =&gt; /lib64/libutil.so.1 (0x00007fb6ebb5a000) libm.so.6 =&gt; /lib64/libm.so.6 (0x00007fb6eb8d6000) libc.so.6 =&gt; /lib64/libc.so.6 (0x00007fb6eb546000) /lib64/ld-linux-x86-64.so.2 (0x00007fb6ec29d000)  如果找不到libpython2.7.so.1.0，可以使用whereis命令查看这个库是否存在:
+whereis libpython2.7.so.1.0 libpython2.7.so.1: /usr/local/lib/libpython2.7.so.1.0  如果存在说明只是链接问题，可以先把这个库的目录加入到/etc/ld.so.conf文件，或者在ld.so.conf.d目录中新建一个conf文件，然后在 /etc/ld.so.conf文件中使用include把这个文件包含进来，最后使用ldconfig命令进行链接就可以了。
+ldd /usr/local/bin/python linux-vdso.……
+                            </div>
+                            <p class="readmore"><a href="andyylzhang.com/post/python-problems/">阅读全文</a></p>
+                        </article>
+                    
+                    
+		    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="andyylzhang.com/post/mysql-interval-groupby/" title="mysql按区间分布" >mysql按区间分布</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月17日
+                            </date>
+                            
+                            <div class="post-content">
+                                一、背景 本人工作大多与网络相关，经常会涉及到网络时延和丢包率的统计分析，除了总体数据之外，有的时候还需要知道时延和丢包率的分布情况。一种方法是直接用脚本来解决，由于比较懒就想看看mysql有没有现成的解决方案，然后就发现了elt和interval两个函数，完美地解决分布统计问题。
+二、知识点介绍 2.1 ELT用法 根据第一个参数值N，返回后面第N个参数，如果没有的话，就返回NULL。它与FIELD函数是互为补充的，FIELD函数是返回第一个参数在后面参数的位置，如果没有就返回0。
+2.2 INTERVAL用法 返回第一个参数在后面排序序列的区间位置。如果N是NULL则返回-1，如果N &lt; N1则返回0，其他就返回相应的值。
+三、实践 最大值、最小值、平均值、标准差分别可以用MAX、MIN、AVG、STD函数来处理，分布的话就需要借助ELT和INTERVAL函数了。 譬如我想把时延分成[0, 20), [20, 50), [50, 100), [100, 150), [150, 200), [200, )几个段，那么SQL如下所示:
+select elt(interval(delay, 0, 20, 50, 100, 150, 200), &quot;[0, 20)&quot;, &quot;[20, 50)&quot;, &quot;[50, 100)&quot;, &quot;[100, 150)&quot;, &quot;[150, 200)&quot;, &quot;[200, )&quot;) as yb, count(delay) as cout from test_delay_lost group by yb;  不过从图上看，区间并没有按照顺序列出，这里有个小技巧，可以在字段名上加上前缀，如下所示:
+select elt(interval(delay, 0, 20, 50, 100, 150, 200), &quot;1/[0, 20)&quot;, &quot;2/[20, 50)&quot;, &quot;3/[50, 100)&quot;, &quot;4/[100, 150)&quot;, &quot;5/[150, 200)&quot;, &quot;6/[200, )&quot;) as yb, count(delay) as cout from test_delay_lost group by yb;  这样就比较完美了，好了，关于MYSQL区间分布的方法讲解到此结束，谢谢。……
+                            </div>
+                            <p class="readmore"><a href="andyylzhang.com/post/mysql-interval-groupby/">阅读全文</a></p>
+                        </article>
+                    
+                    
+		    
+                        <article class="post">
+                            <header>
+                                <h1 class="post-title">
+                                    <a href="andyylzhang.com/post/php-fpm-managements/" title="php-fpm进程管理" >php-fpm进程管理</a>
+                                </h1>
+                            </header>
+                            <date class="post-meta meta-date">
+                                2019年10月17日
+                            </date>
+                            
+                            <div class="post-content">
+                                 重启php-fpm 最简单的方式是直接kill掉，然后用php-fpm启动即可。还有一种方式是通过信号处理:
+ INT、TERM——立刻终止 QUIT——平滑终止 USR1——重新打开日志文件 USR2——平滑重载所有worker进程并重新载入配置和二进制模块  ……
+                            </div>
+                            <p class="readmore"><a href="andyylzhang.com/post/php-fpm-managements/">阅读全文</a></p>
+                        </article>
+                    
+                    
+                    
+
+
+
+
+
+                </div>
+            </div>
+
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="andyylzhang.com/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="andyylzhang.com/post/python-problems/" title="python问题解决方案">python问题解决方案</a>
+    </li>
+    
+    <li>
+        <a href="andyylzhang.com/post/mysql-interval-groupby/" title="mysql按区间分布">mysql按区间分布</a>
+    </li>
+    
+    <li>
+        <a href="andyylzhang.com/post/php-fpm-managements/" title="php-fpm进程管理">php-fpm进程管理</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="andyylzhang.com/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="andyylzhang.com/andyylzhang.com/">moluzhang的博客 By </a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/andyylzhang.com/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+
+</body>
+</html>
