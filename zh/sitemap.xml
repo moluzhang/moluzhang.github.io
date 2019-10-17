@@ -3,44 +3,44 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>andyylzhang.com/zh/categories/</loc>
+    <loc>/zh/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="andyylzhang.com/categories/"
+                href="/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="andyylzhang.com/zh/categories/"
+                href="/zh/categories/"
                 />
   </url>
   
   <url>
-    <loc>andyylzhang.com/zh/</loc>
+    <loc>/zh/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="andyylzhang.com/"
+                href="/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="andyylzhang.com/zh/"
+                href="/zh/"
                 />
   </url>
   
   <url>
-    <loc>andyylzhang.com/zh/tags/</loc>
+    <loc>/zh/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="andyylzhang.com/tags/"
+                href="/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
-                href="andyylzhang.com/zh/tags/"
+                href="/zh/tags/"
                 />
   </url>
   

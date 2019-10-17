@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>moluzhang的博客</title>
-    <link>andyylzhang.com/</link>
+    <link>/</link>
     <description>Recent content on moluzhang的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 17 Oct 2019 17:51:31 +0800</lastBuildDate>
     
-	<atom:link href="andyylzhang.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>python问题解决方案</title>
-      <link>andyylzhang.com/post/python-problems/</link>
+      <link>/post/python-problems/</link>
       <pubDate>Thu, 17 Oct 2019 17:51:31 +0800</pubDate>
       
-      <guid>andyylzhang.com/post/python-problems/</guid>
+      <guid>/post/python-problems/</guid>
       <description>1. libpython2.7.so.1.0 cannot open的解决方法 一台服务器上安装了多个python，配置不当会导致python运行时找不到某些系统库，比如今天遇到的在执行python命令时报:
 python error while loading shared libraries: libpython2.7.so.1.0: cannot open shared object file: No such file or directory  找不到libpython2.7.so.1这个库，我们可以使用ldd命令来查看一个可执行文件执行时需要哪些系统库:
 ldd /usr/local/bin/python linux-vdso.so.1 =&amp;gt; (0x00007fff149a2000) /$LIB/libonion.so =&amp;gt; /lib64/libonion.so (0x00007fb6ec18d000) libpython2.7.so.1.0 =&amp;gt; not found libpthread.so.0 =&amp;gt; /lib64/libpthread.so.0 (0x00007fb6ebf62000) libdl.so.2 =&amp;gt; /lib64/libdl.so.2 (0x00007fb6ebd5e000) libutil.so.1 =&amp;gt; /lib64/libutil.so.1 (0x00007fb6ebb5a000) libm.so.6 =&amp;gt; /lib64/libm.so.6 (0x00007fb6eb8d6000) libc.so.6 =&amp;gt; /lib64/libc.so.6 (0x00007fb6eb546000) /lib64/ld-linux-x86-64.so.2 (0x00007fb6ec29d000)  如果找不到libpython2.7.so.1.0，可以使用whereis命令查看这个库是否存在:
@@ -26,10 +26,10 @@ ldd /usr/local/bin/python linux-vdso.</description>
     
     <item>
       <title>mysql按区间分布</title>
-      <link>andyylzhang.com/post/mysql-interval-groupby/</link>
+      <link>/post/mysql-interval-groupby/</link>
       <pubDate>Thu, 17 Oct 2019 17:51:20 +0800</pubDate>
       
-      <guid>andyylzhang.com/post/mysql-interval-groupby/</guid>
+      <guid>/post/mysql-interval-groupby/</guid>
       <description>一、背景 本人工作大多与网络相关，经常会涉及到网络时延和丢包率的统计分析，除了总体数据之外，有的时候还需要知道时延和丢包率的分布情况。一种方法是直接用脚本来解决，由于比较懒就想看看mysql有没有现成的解决方案，然后就发现了elt和interval两个函数，完美地解决分布统计问题。
 二、知识点介绍 2.1 ELT用法 根据第一个参数值N，返回后面第N个参数，如果没有的话，就返回NULL。它与FIELD函数是互为补充的，FIELD函数是返回第一个参数在后面参数的位置，如果没有就返回0。
 2.2 INTERVAL用法 返回第一个参数在后面排序序列的区间位置。如果N是NULL则返回-1，如果N &amp;lt; N1则返回0，其他就返回相应的值。
@@ -40,10 +40,10 @@ select elt(interval(delay, 0, 20, 50, 100, 150, 200), &amp;quot;1/[0, 20)&amp;qu
     
     <item>
       <title>php-fpm进程管理</title>
-      <link>andyylzhang.com/post/php-fpm-managements/</link>
+      <link>/post/php-fpm-managements/</link>
       <pubDate>Thu, 17 Oct 2019 17:51:03 +0800</pubDate>
       
-      <guid>andyylzhang.com/post/php-fpm-managements/</guid>
+      <guid>/post/php-fpm-managements/</guid>
       <description> 重启php-fpm 最简单的方式是直接kill掉，然后用php-fpm启动即可。还有一种方式是通过信号处理:
  INT、TERM——立刻终止 QUIT——平滑终止 USR1——重新打开日志文件 USR2——平滑重载所有worker进程并重新载入配置和二进制模块  </description>
     </item>
